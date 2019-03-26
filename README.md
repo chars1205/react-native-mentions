@@ -32,9 +32,9 @@ import MentionsTextInput from 'react-native-mentions';
     suggestionsData={this.state.data} // array of objects
     keyExtractor={(item, index) => item.UserName} 
     suggestionRowHeight={45}
-          
     horizontal={false} // default is true, change the orientation of the list
     MaxVisibleRowCount={3} // this is required if horizontal={false}
+    keywordRegExpPattern={'a-z0-9_-'} // default is 'a-z0-9_-', keyword RegExp pattern custom
   />
 ```
 

@@ -75,7 +75,7 @@ export default class MentionsTextInput extends Component {
   identifyKeyword(val) {
     if (this.isTrackingStarted) {
       const boundary = this.props.triggerLocation === 'new-word-only' ? 'B' : '';
-      const pattern = new RegExp(`\\${boundary}${this.props.trigger}[a-z0-9_-]+|\\${boundary}${this.props.trigger}`, `gi`);
+      const pattern = new RegExp(`\\${boundary}${this.props.trigger}[${this.props.keywordRegExpPattern}]+|\\${boundary}${this.props.trigger}`, `gi`);
       const keywordArray = val.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
@@ -158,6 +158,7 @@ MentionsTextInput.propTypes = {
   keyExtractor: PropTypes.func.isRequired,
   horizontal: PropTypes.bool,
   suggestionRowHeight: PropTypes.number.isRequired,
+  keywordRegExpPattern: PropTypes.string,
   MaxVisibleRowCount: function(props, propName, componentName) {
     if(!props.horizontal && !props.MaxVisibleRowCount) {
       return new Error(
@@ -174,4 +175,5 @@ MentionsTextInput.defaultProps = {
   textInputMinHeight: 30,
   textInputMaxHeight: 80,
   horizontal: true,
+  keywordRegExpPattern = 'a-z0-9_-'
 }
